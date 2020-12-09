@@ -11,6 +11,13 @@ def mainPage():
 def basicJson():
     return render_template('lamp.html')
 
+@app.route('/setValues', methods = ['POST'])
+def setValues():
+    print("SETTTTTT")
+    data = request.json
+    print(data)
+    return "Nice"
+
 @app.before_request
 def log_request_info():
     app.logger.debug('Headers: %s', request.headers)
