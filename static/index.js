@@ -71,16 +71,16 @@ function showMeWhatYouGot(){
 
 function setValues(){
 	console.log("setValues() executed");
-	var form =  {"r":document.getElementById('red').value.toString(),
-				"g":document.getElementById('green').value.toString(),
-				"b":document.getElementById('blue').value.toString(),
-				"l":document.getElementById('brightness').value.toString(),
-				"t":document.getElementById('switch').value.toString(),
-				"e":"0"};
+	var form =  {"red":document.getElementById('red').value.toString(),
+				"green":document.getElementById('green').value.toString(),
+				"blue":document.getElementById('blue').value.toString(),
+				"brightness":document.getElementById('brightness').value.toString(),
+				"toggle":document.getElementById('switch').value.toString(),
+				"extra":""};
 	console.log(form);
 	var sendJSON = JSON.stringify(form);
 	console.log(sendJSON);
-	fetch("/setValues", {
+	fetch("/lampy/setValues", {
 	    method: "POST",
 	    headers: { "Content-Type": "application/json" },
 	    body: sendJSON
@@ -92,11 +92,11 @@ function setValues(){
 
 function setStatus(){
 	console.log("setStatus() executed");
-	var form = {"t":document.getElementById('switch').value.toString(),
-				"e":"0"};
+	var form = {"toggle":document.getElementById('switch').value.toString(),
+				"extra":""};
 	console.log(form);
 	var sendJSON = JSON.stringify(form);
-	fetch("/setValues", {
+	fetch("/lampy/setValues", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: sendJSON
@@ -107,10 +107,10 @@ function setStatus(){
 
 function setBrightness(){
 	console.log("setBrightness() executed");
-	var form = {"l":document.getElementById('brightness').value.toString()};
+	var form = {"brightness":document.getElementById('brightness').value.toString()};
 	console.log(form);
 	var sendJSON = JSON.stringify(form);
-	fetch("/setValues", {
+	fetch("/lampy/setValues", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: sendJSON
@@ -121,19 +121,19 @@ function setBrightness(){
 }
 
 
-function extra(number){
+function extra(input){
 	console.log("extra() executed");
-	var form = {"e":number.toString()};
+	var form = {"extra":input.toString()};
 	console.log(form);
 	var sendJSON = JSON.stringify(form);
-	fetch("/setValues", {
+	fetch("/lampy/setValues", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: sendJSON
 	}).then( res => {
 		console.log(res);
 
-		if(number==1337 &&checkResponse(res)==200)
+		if(input==1337 &&checkResponse(res)==200)
 			allOfTheLights();
 
 	})
@@ -143,10 +143,10 @@ function extra(number){
 
 function extraOff(){
 	console.log("alarmOff() executed");
-	fetch("/setValues", {
+	fetch("/lampy/setValues", {
 	    method: "POST",
 	    headers: { "Content-Type": "application/json" },
-	    body: '{"e":"0"}'
+	    body: '{"extra":""}'
 	}).then( res => {
 		console.log(res);
 	})
