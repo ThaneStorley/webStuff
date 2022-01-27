@@ -52,6 +52,7 @@ function selectImage(state)
 	}
 
 }
+
 */
 function showMeWhatYouGot(){
 	console.log("NOT ACTIVE 1.......alarm()");
@@ -82,7 +83,9 @@ function setValues(){
 	console.log(sendJSON);
 	fetch("/lampy/setValues", {
 	    method: "POST",
-	    headers: { "Content-Type": "application/json" },
+	    headers: {
+		"Content-Type": "application/json"
+	    },
 	    body: sendJSON
 	}).then( res => {
 		console.log(res);
@@ -102,6 +105,8 @@ function setStatus(){
 		body: sendJSON
 	}).then(res => {
 		console.log(res);
+	}).then(function(response) {
+		return response.text();
 	})
 }
 
@@ -116,6 +121,8 @@ function setBrightness(){
 		body: sendJSON
 	}).then(res => {
 		console.log(res);
+	}).then(function(response) {
+		return response.text();
 	})
 	
 }
@@ -136,8 +143,9 @@ function extra(input){
 		if(input==1337 &&checkResponse(res)==200)
 			allOfTheLights();
 
+	}).then(function(response) {
+		return response.text();
 	})
-
 
 }
 
@@ -149,6 +157,8 @@ function extraOff(){
 	    body: '{"extra":""}'
 	}).then( res => {
 		console.log(res);
+	}).then(function(response) {
+		return response.text();
 	})
 
 
